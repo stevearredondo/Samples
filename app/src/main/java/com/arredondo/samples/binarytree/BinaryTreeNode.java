@@ -115,7 +115,6 @@ public class BinaryTreeNode<T extends Comparable<T>>
             /*Return this node now that the appropriate child node has been modified*/
             return this;
         }
-        //FIXME
         else if (comp < 0) //search left
         {
             if (left==null) throw noSuchValue(value);
@@ -143,11 +142,11 @@ public class BinaryTreeNode<T extends Comparable<T>>
                 * (its "predecessor"). This node is guaranteed to have at most a left child, and
                 * therefore can easily be deleted.
                 */
-                BinaryTreeNode<T> predecessor = left.getRightMostChild();
+                BinaryTreeNode<T> predecessor = left.getMax();
                 this.value = predecessor.getValue();
-                /*Delete the predecessor node. If it has a left child, any re-balancing will be
-                * taken care of. Otherwise, deletion will be trivial.*/
-                predecessor.delete(predecessor.getValue());
+                /* Delete the predecessor node from the left subtree. If the predecessor has a left
+                * child, any re-balancing will be taken care of. Otherwise, deletion will be trivial.*/
+                left = left.delete(predecessor.getValue());
                 return this;
             }
         }
@@ -163,7 +162,6 @@ public class BinaryTreeNode<T extends Comparable<T>>
     protected boolean contains(T value) throws IllegalArgumentException
     {
         if (value==null) throw nullArg();
-        boolean result = false;
         int comp = value.compareTo(this.value);
         if (comp < 0)
             return left!=null && left.contains(value);
@@ -177,7 +175,7 @@ public class BinaryTreeNode<T extends Comparable<T>>
      * Starting with the calling node, this method searches for the furthest-right child.
      * @return Either the calling node, or a node with at most a left child and no right child.
      */
-    private BinaryTreeNode<T> getRightMostChild()
+    private BinaryTreeNode<T> getMax()
     {
         BinaryTreeNode<T> result = this;
         while (result.getRight()!=null)

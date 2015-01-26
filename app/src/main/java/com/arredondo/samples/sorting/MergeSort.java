@@ -59,7 +59,7 @@ public class MergeSort
      */
     private static <T extends Comparable<T>> void merge(T[] a, int lo, int md, int hi)
     {
-        //Object[] b = new Object[hi-lo+1];
+        /*Cannot directly instantiate T: unable to say T[] b = new T[hi-lo+1]*/
         ArrayList<T> b = new ArrayList<T>(hi-lo+1);
 
         /*Iteration variables*/
@@ -74,12 +74,12 @@ public class MergeSort
         {
             if (a[i].compareTo(a[j]) <= 0) //a[i] less or equal to a[j]
             {
-                b.add(k,a[i]);// = a[i];
+                b.add(k,a[i]);
                 i++;
             }
             else //a[i] greater than a[j]
             {
-                b.add(k,a[j]);// = a[j];
+                b.add(k,a[j]);
                 j++;
             }
             k++;
@@ -88,7 +88,7 @@ public class MergeSort
         {
             for (l=j; l<=hi; l++)
             {
-                b.add(k,a[l]);// = a[l];
+                b.add(k,a[l]);
                 k++;
             }
         }
@@ -96,14 +96,14 @@ public class MergeSort
         {
             for (l=i; l<=md; l++)
             {
-                b.add(k,a[l]);// a[l];
+                b.add(k,a[l]);
                 k++;
             }
         }
         /*Copy b (sorted) into a*/
         for (k=0; k<b.size(); k++)
         {
-            a[k+lo] = b.get(k);//(T) b[k];
+            a[k+lo] = b.get(k);
         }
     }
 }
