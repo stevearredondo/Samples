@@ -3,7 +3,6 @@ package com.arredondo.samples.sorting;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class MergeSortTest extends TestCase
 {
@@ -14,7 +13,7 @@ public class MergeSortTest extends TestCase
         Integer[] b = new Integer[a.length];
         System.arraycopy(a,0,b,0,b.length);
         MergeSort.sort(a);
-        Collections.sort(Arrays.asList(b));
+        Arrays.sort(b);
         assertTrue(Arrays.equals(a,b));
     }
 }

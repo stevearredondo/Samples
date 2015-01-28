@@ -3,7 +3,6 @@ package com.arredondo.samples.sorting;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class QuickSortTest extends TestCase
 {
@@ -17,7 +16,7 @@ public class QuickSortTest extends TestCase
         Integer[] b = new Integer[a.length];
         System.arraycopy(a,0,b,0,b.length);
         QuickSort.sort(a);
-        Collections.sort(Arrays.asList(b));
+        Arrays.sort(b);
         assertTrue(Arrays.equals(a,b));
     }
 }

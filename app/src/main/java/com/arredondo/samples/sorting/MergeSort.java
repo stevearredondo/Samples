@@ -11,7 +11,7 @@ public class MergeSort
 {
     /**
      * Performs a merge sort on all of {@code a}.
-     * Equivalent to {@code sort(a, 0, a.length-1)}.
+     * Equivalent to <code>sort(a, 0, a.length-1)</code>
      * @param a      The array to sort.
      * @param <T>    Base type of array {@code a} that implements {@link java.lang.Comparable}
      * @see #sort(Comparable[], int, int)
@@ -40,7 +40,7 @@ public class MergeSort
         //Make sure that there is at least one element in a from lo to hi
         if (lo < hi)
         {
-            int md = (hi-lo)/2;
+            int md = lo + (hi-lo)/2;
             sort(a, lo, md);
             sort(a, md + 1, hi);
             merge(a, lo, md, hi);
@@ -64,7 +64,7 @@ public class MergeSort
 
         /*Iteration variables*/
         int     i = lo, // index through subarray a[lo : md]
-                j = md, // index through subarray a[md+1 : hi]
+                j = md+1, // index through subarray a[md+1 : hi]
                 k = 0,  // index through b
                 l;      // multiple use iterative variable
 
@@ -100,10 +100,10 @@ public class MergeSort
                 k++;
             }
         }
-        /*Copy b (sorted) into a*/
-        for (k=0; k<b.size(); k++)
+        /*Copy b (sorted) into a. k now has the value of the length of b*/
+        for (l=0; l < k; l++)
         {
-            a[k+lo] = b.get(k);
+            a[l+lo] = b.get(l);
         }
     }
 }
