@@ -62,6 +62,16 @@ public class BinaryTree<T extends Comparable<T>>
         return root.contains(value);
     }
 
+    /**
+     * Prints this tree horizontally by calling {@link BinaryTreeNode#print()} on the root.
+     * @throws java.lang.RuntimeException if the root of this tree is null
+     */
+    public void print() throws RuntimeException
+    {
+        if (root==null) throw nullRoot();
+        root.print();
+    }
+
     private static RuntimeException nullRoot()
     {
         return new RuntimeException("Need to create a root first");

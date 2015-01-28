@@ -172,6 +172,41 @@ public class BinaryTreeNode<T extends Comparable<T>>
     }
 
     /**
+     * Prints the subtree of this node horizontally. The nodes are displayed using the
+     * {@link Object#toString()} method on the node's {@linkplain #getValue() value parameter}.
+     */
+    protected void print()
+    {
+        print("",true);
+    }
+
+    private static final String TAIL  = "`-- ";
+    private static final String SPLIT = "+-- ";
+    private static final String STEM  = "|   ";
+    private static final String SPACE = "    ";
+    /**
+     * Prints the subtree of this tree node horizontally, where left child nodes are displayed
+     * on top of right child nodes.
+     * @param prefix    Initial spaces or characters needed to correctly format the layout.
+     * @param isTail    Whether the piece being printed is a "tail" ({@value #TAIL}), or
+     *                  a "split" ({@value #SPLIT}).
+     */
+    private void print(String prefix, boolean isTail)
+    {
+        System.out.println(prefix + (isTail ? TAIL : SPLIT) + value.toString());
+        if (left==null && right==null) return; //nothing to do if no children.
+        if (left!=null && right!=null) //has both children.
+        {
+            left.print(prefix + (isTail ? SPACE : STEM), false); //Place left child on top at middle of a split.
+            right.print(prefix + (isTail ? SPACE : STEM), true); //Place right on bottom at end of a tail.
+        }
+        else if (left==null) //Right child only. Place at end of a tail.
+            right.print(prefix + (isTail ? SPACE : STEM), true);
+        else //Left child only. Place at end of a tail.
+            left.print(prefix + (isTail ? SPACE : STEM), true);
+    }
+
+    /**
      * Starting with the calling node, this method searches for the furthest-right child.
      * @return Either the calling node, or a node with at most a left child and no right child.
      */
