@@ -70,4 +70,17 @@ public class BinaryTreeNodeTest extends TestCase
         mNode.insert(7);
         mNode.print();
     }
+
+    public void testDepth() throws Exception
+    {
+        mNode = new BinaryTreeNode<Integer>(8);
+        mNode.insert(5);
+        mNode.insert(10);
+        mNode.insert(11);
+        mNode.insert(9);
+        mNode.insert(2);
+        mNode.insert(1);
+        mNode.insert(7);
+        assertEquals(4, mNode.depth());
+    }
 }

@@ -5,8 +5,9 @@ public class IntegerSquareRoot
 {
     /**
      * Computes the integer square root of <var>n</var> using a binary search.
-     * @param n    A positive integer. An {@link java.lang.IllegalArgumentException} is thrown if n &le; 0
+     * @param n    A positive integer.
      * @return The integer (floor of the) square root of <var>n</var>
+     * @throws java.lang.IllegalArgumentException if n &le; 0
      */
     public static int isqrt(int n)
     {

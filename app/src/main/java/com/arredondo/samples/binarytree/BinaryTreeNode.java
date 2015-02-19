@@ -17,9 +17,8 @@ public class BinaryTreeNode<T extends Comparable<T>>
     /**
      * Constructor.
      * @param value    Non-null value to give this node
-     * @throws java.lang.IllegalArgumentException if {@code value} is null
      */
-    protected BinaryTreeNode(T value) throws IllegalArgumentException
+    protected BinaryTreeNode(T value)
     {
         if (value==null) throw new IllegalArgumentException("Value must be non-null");
         this.value = value;
@@ -62,7 +61,7 @@ public class BinaryTreeNode<T extends Comparable<T>>
      * @throws java.lang.RuntimeException if argument is null or if a node with the given value
      * already exists in the tree
      */
-    protected void insert(T value) throws RuntimeException
+    protected void insert(T value)
     {
         //Don't allow attempts to insert null values
         if (value==null) throw nullArg();
@@ -97,7 +96,7 @@ public class BinaryTreeNode<T extends Comparable<T>>
      * @throws java.lang.RuntimeException if argument is null or the given value could not be
      * found in the subtree
      */
-    protected BinaryTreeNode<T> delete(T value) throws RuntimeException
+    protected BinaryTreeNode<T> delete(T value)
     {
         if (value==null) throw nullArg();
 
@@ -142,11 +141,11 @@ public class BinaryTreeNode<T extends Comparable<T>>
                 * (its "predecessor"). This node is guaranteed to have at most a left child, and
                 * therefore can easily be deleted.
                 */
-                BinaryTreeNode<T> predecessor = left.getMax();
-                this.value = predecessor.getValue();
+                T predecessorValue = left.getMax();
+                this.value = predecessorValue;
                 /* Delete the predecessor node from the left subtree. If the predecessor has a left
                 * child, any re-balancing will be taken care of. Otherwise, deletion will be trivial.*/
-                left = left.delete(predecessor.getValue());
+                left = left.delete(predecessorValue);
                 return this;
             }
         }
@@ -157,11 +156,9 @@ public class BinaryTreeNode<T extends Comparable<T>>
      * @param value    The value to search for in the subtree of this node
      * @return True if the argument matches the value of the calling node or any of its child nodes.
      * False otherwise.
-     * @throws java.lang.IllegalArgumentException if argument is null
      */
-    protected boolean contains(T value) throws IllegalArgumentException
+    protected boolean contains(T value)
     {
-        if (value==null) throw nullArg();
         int comp = value.compareTo(this.value);
         if (comp < 0)
             return left!=null && left.contains(value);
@@ -169,6 +166,19 @@ public class BinaryTreeNode<T extends Comparable<T>>
             return right!=null && right.contains(value);
         else //comp == 0
             return true;
+    }
+
+    /**
+     * Computes the depth of the subtree of this node by computing the max of the depths of its
+     * left and right child nodes, plus 1.
+     * @return The depth of this node's subtree, always at least 1.
+     */
+    protected int depth()
+    {
+        int lDepth = 0, rDepth = 0;
+        if (left!=null) lDepth = left.depth();
+        if (right!=null) rDepth = right.depth();
+        return 1 + (lDepth >= rDepth ? lDepth : rDepth);
     }
 
     /**
@@ -210,19 +220,18 @@ public class BinaryTreeNode<T extends Comparable<T>>
      * Starting with the calling node, this method searches for the furthest-right child.
      * @return Either the calling node, or a node with at most a left child and no right child.
      */
-    private BinaryTreeNode<T> getMax()
+    private T getMax()
     {
-        BinaryTreeNode<T> result = this;
-        while (result.getRight()!=null)
+        BinaryTreeNode<T> resultNode = this;
+        while (resultNode.getRight()!=null)
         {
-            result = result.getRight();
+            resultNode = resultNode.getRight();
         }
-        return result;
+        return resultNode.getValue();
     }
 
     /**
-     * Helper method for when arguments (e.g. values or nodes) are null. Can be
-     * replaced with NonNull annotation on method argument if using JDK 8.
+     * Helper method for when arguments (e.g. values or nodes) are null.
      */
     private static IllegalArgumentException nullArg()
     {
