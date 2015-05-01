@@ -1,9 +1,9 @@
-package com.arredondo.samples.binarytree;
+package com.arredondo.samples.structures.binarytree;
 
 /* Created by Stephen on 12/9/2014. */
 
 /**
- * Top-level abstraction of {@link com.arredondo.samples.binarytree.BinaryTreeNode}, where the client
+ * Top-level abstraction of {@link com.arredondo.samples.structures.binarytree.BinaryTreeNode}, where the client
  * has access to only the root node of this tree. All node insertion and deletion functions are
  * performed on the
  * @param <T>
@@ -26,9 +26,9 @@ public class BinaryTree<T extends Comparable<T>>
     }
 
     /**
-     * Calls {@link com.arredondo.samples.binarytree.BinaryTreeNode#insert(Comparable)}
+     * Calls {@link com.arredondo.samples.structures.binarytree.BinaryTreeNode#insert(Comparable)}
      * on the root of this tree. If the root is null, the root is set to a new
-     * instance of {@link com.arredondo.samples.binarytree.BinaryTreeNode} with the
+     * instance of {@link com.arredondo.samples.structures.binarytree.BinaryTreeNode} with the
      * given value.
      * @param value    The value to insert into this tree.
      */
@@ -46,7 +46,7 @@ public class BinaryTree<T extends Comparable<T>>
 
     /**
      * Attempts to delete a node of value {@code value} from this tree by calling
-     * {@link com.arredondo.samples.binarytree.BinaryTreeNode#delete(Comparable)}
+     * {@link com.arredondo.samples.structures.binarytree.BinaryTreeNode#delete(Comparable)}
      * on the root node of this tree and setting it to the returned (updated) node.
      * @param value    The value to attempt to delete from this tree
      * @throws java.lang.RuntimeException if the root of this tree is null

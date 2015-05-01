@@ -1,4 +1,4 @@
-package com.arredondo.samples.binarytree;
+package com.arredondo.samples.structures.binarytree;
 /* Created by Stephen on 12/9/2014. */
 
 /**

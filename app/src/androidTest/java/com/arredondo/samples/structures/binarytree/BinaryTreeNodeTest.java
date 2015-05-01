@@ -1,4 +1,4 @@
-package com.arredondo.samples.binarytree;
+package com.arredondo.samples.structures.binarytree;
 
 import junit.framework.TestCase;
 

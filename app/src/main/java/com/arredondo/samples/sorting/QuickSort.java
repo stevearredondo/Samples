@@ -86,6 +86,7 @@ public class QuickSort
      * @param <T>    The base type of the array. This must implement {@link java.lang.Comparable}
      * @return The pivot index. Currently this is the average of <var>lo</var> and <var>hi</var>
      */
+    @SuppressWarnings("unused")
     public static <T extends Comparable<T>> int getPivotIndex(T[] a, int lo, int hi)
     {
         return lo + (hi-lo)/2;
