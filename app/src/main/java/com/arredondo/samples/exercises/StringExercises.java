@@ -203,7 +203,7 @@ public class StringExercises
         {
             for (int i = 0; i < 26; i++)
             {
-                sCharToPrimeMap.put((char) ('a' + i), PrimeNumber.getPrime(i));
+                sCharToPrimeMap.put((char) ('a' + i), (int) PrimeNumber.getPrime(i));
             }
         }
         return sCharToPrimeMap;
