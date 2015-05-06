@@ -10,14 +10,14 @@ import java.util.List;
 
 public class StringExercisesTest extends TestCase
 {
-    public void testHtmlReverse() throws Exception
+    public void testHtmlReverseNoRegex() throws Exception
     {
-        assertEquals("", StringExercises.htmlReverse(""));
+        assertEquals("", StringExercises.htmlReverseNoRegex(""));
 
         boolean exceptionThrown = false;
         try
         {
-            StringExercises.htmlReverse("&123");
+            StringExercises.htmlReverseNoRegex("&123");
         }
         catch (RuntimeException e)
         {
@@ -29,14 +29,14 @@ public class StringExercisesTest extends TestCase
         }
 
         String s1 = "Mary had a little lamb";
-        assertEquals("bmal elttil a dah yraM", StringExercises.htmlReverse(s1));
-        assertEquals(StringExercises.reverse(s1), StringExercises.htmlReverse(s1));
+        assertEquals("bmal elttil a dah yraM", StringExercises.htmlReverseNoRegex(s1));
+        assertEquals(StringExercises.reverse(s1), StringExercises.htmlReverseNoRegex(s1));
 
         String s2 = "&yen;123";
-        assertEquals("321&yen;", StringExercises.htmlReverse(s2));
+        assertEquals("321&yen;", StringExercises.htmlReverseNoRegex(s2));
 
         String s3 = "456&yen;123&yen;&yen;";
-        assertEquals("&yen;&yen;321&yen;654", StringExercises.htmlReverse(s3));
+        assertEquals("&yen;&yen;321&yen;654", StringExercises.htmlReverseNoRegex(s3));
     }
 
     public void testGetPalindromes() throws Exception
@@ -55,20 +55,23 @@ public class StringExercisesTest extends TestCase
         assertTrue(expected.containsAll(anagrams));
     }
 
-    public void testHtmlReverse2() throws Exception
+    public void testHtmlReverseWithRegex() throws Exception
     {
-        assertEquals(null, StringExercises.htmlReverse2(null));
+        assertEquals(null, StringExercises.htmlReverseWithRegex(null));
 
-        assertEquals("", StringExercises.htmlReverse2(""));
+        assertEquals("", StringExercises.htmlReverseWithRegex(""));
 
         String s2 = "&yen;123";
-        assertEquals("321&yen;", StringExercises.htmlReverse2(s2));
+        assertEquals("321&yen;", StringExercises.htmlReverseWithRegex(s2));
 
         String s3 = "456&yen;123&yen;&yen;";
-        assertEquals("&yen;&yen;321&yen;654", StringExercises.htmlReverse2(s3));
+        assertEquals("&yen;&yen;321&yen;654", StringExercises.htmlReverseWithRegex(s3));
 
         String s4 = "No Html";
-        assertEquals("lmtH oN", StringExercises.htmlReverse2(s4));
+        assertEquals("lmtH oN", StringExercises.htmlReverseWithRegex(s4));
+
+        String s5 = "Bad HTML &asdfasdfasdf;";
+        assertEquals(";fdsafdsafdsa& LMTH daB", StringExercises.htmlReverseWithRegex(s5));
     }
 
     public void testHtmlEntityRegex() throws Exception
@@ -77,6 +80,7 @@ public class StringExercisesTest extends TestCase
         strings.add("&lt;Ampersand looks like &amp;&amp; &theta; test&pi;asd &gt;");
         strings.add("This sentence has no html");
         strings.add("");
+        strings.add("Trick question: Is &asdfasdfasdf; an entity?");
         for (String s : strings)
         {
             String[] split = s.split("((?<=(&[#\\w]{1,10};))|(?=(&[#\\w]{1,10};)))");

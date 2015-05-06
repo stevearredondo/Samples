@@ -24,7 +24,7 @@ public class StringExercises
      * @throws java.lang.NullPointerException if input is null
      * @throws java.lang.IllegalArgumentException if a non-terminating entity is encountered.
      */
-    public static String htmlReverse(String s)
+    public static String htmlReverseNoRegex(String s)
     {
         int l = s.length();
         StringBuilder sb = new StringBuilder(l);
@@ -63,13 +63,22 @@ public class StringExercises
 
     /**
      * Reverses <var>s</var> while preserving HTML entities. For example, "I like &amp;pi;"
-     * returns "&amp;pi; ekil I". Unlike {@link #htmlReverse(String)}, this method will not
-     * throw an exception if an incomplete HTML entity is added. For example, "&theta" would
-     * simply be treated as a normal string.☺
+     * yields "&amp;pi; ekil I".
+     * <p>
+     *     Unlike {@link #htmlReverseNoRegex(String)}, this method will not throw an exception
+     *     if an incomplete HTML entity is added. For example, "&amp;theta" would simply be
+     *     treated as a normal string.
+     * </p>
+     * <p>
+     *     This method considers an HTML entity to be of the form {@code &amp;X;}, where
+     *     {@code X} can be a sequence containing alphanumeric characters and/or the '#'
+     *     character, up to 10 characters in length. For example, "&amp;sigma;" and
+     *     "&amp;#0045;" would be treated as entities, but "&amp;asdfasdfasdf;" would not.
+     * </p>
      * @param s    The string to reverse
      * @return The reversed string with HTML entities preserved, or null if <var>s</var> is null.
      */
-    public static String htmlReverse2(String s)
+    public static String htmlReverseWithRegex(String s)
     {
         if (s==null || s.isEmpty()) return s;
 
