@@ -241,10 +241,10 @@ public class StringExercises
      */
     public static List<String> getAnagrams(List<String> strings)
     {
-        /* Each character 'a'-'z' can be mapped to the nth prime number, where n is the index of
-        the character in the alphabet. E.g. 'a': prime(0)=2, 'b': prime(1)=2, etc. Compute the
-        product of the prime number mappings of the characters in s. Anagrams will have the same
-        character product. Thus we can use the product as a key to a set of anagrams.*/
+        /*Each character 'a'-'z' can be mapped to the nth prime number, where n is the index of
+        the character in the alphabet. E.g. 'a': prime(0)=2, 'b': prime(1)=3, 'c': prime(2)=5, etc.
+        Compute the product of the prime number mappings of the characters in s. Anagrams will have
+        the same character product. Thus we can use the product as a key to a set of anagrams.*/
 
         Map<Long, Set<String>> map = new HashMap<Long, Set<String>>();
 
